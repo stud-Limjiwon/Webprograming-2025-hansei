@@ -1,4 +1,4 @@
-﻿# Webprograming-2025-hansei_01
+﻿# Webprograming-2025-hansei
 # 🌉 BRIDGE : IoT 기반 장애인 접근성 자동화 웹 서비스 (프론트엔드 기획)
 
 ![서비스의 핵심 UI 컨셉 이미지] (images/main_dashboard_concept.png) 
@@ -46,3 +46,4 @@ BRIDGE는 NFC/BLE 등의 IoT 근거리 통신 기술을 활용하여 **장애인
 * **JavaScript:** 개인 설정 저장/로드 로직 및 IoT 통신(가정) 기반 UI 전환 로직 구현
 
 ---
+
