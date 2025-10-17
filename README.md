@@ -11,7 +11,7 @@
 
 자세한 기획 의도와 기능 정의, 시연은 아래 링크를 참고해 주십시오.
 
-### 1. 📋 [상세 기획안 (GitHub Wiki)]([https://github.com/stud-Limjiwon/Webprograming-2025-hansei.wiki.git])
+### 1. 📋 [상세 기획안 (GitHub Wiki)](https://github.com/stud-Limjiwon/Webprograming-2025-hansei.wiki.git)
 * 프로젝트 배경, 문제 정의, 시스템 아키텍처, 상세 기능 정의 등 **전체 기획 문서**가 포함되어 있습니다.
 
 ### 2. 🎨 [UI/UX 디자인 및 흐름 시연 (Figma Prototype)]
@@ -33,6 +33,7 @@
 * **JavaScript:** 개인 설정 저장/로드 로직 및 IoT 통신(가정) 기반 UI 전환 로직 구현
 
 ---
+
 
 
 
