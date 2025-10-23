@@ -15,15 +15,8 @@
 * 프로젝트 배경, 문제 정의, 시스템 아키텍처, 상세 기능 정의 등 **전체 기획 문서**가 포함되어 있습니다.
 
 
-### 2. 🎨 [UI/UX 디자인 및 흐름 시연 (Figma Prototype)]
-
-* **Figma Link:** 
+### 2. 🎨 [프로토타입 (Figma Prototype)](https://www.figma.com/design/X7RrlDysDkstcRikAA0ipO/web-programming?node-id=0-1&t=zCVct50kyhQUIszu-1)
 * **내용:** 사용자 설정 등록 과정, 키오스크 맞춤 모드 시연 등의 인터랙티브 흐름을 확인하실 수 있습니다.
-
-### 3. 💻 [코드 기반 프로토타입 시연 (Anima / Live)]
-
-* **Anima Live URL:** 
-* **내용:** 디자인이 HTML/CSS 코드로 변환된 **실제 작동하는 정적 프론트엔드 UI**를 검증할 수 있습니다.
 
 ---
 
@@ -34,6 +27,7 @@
 * **JavaScript:** 개인 설정 저장/로드 로직 및 IoT 통신(가정) 기반 UI 전환 로직 구현
 
 ---
+
 
 
 
