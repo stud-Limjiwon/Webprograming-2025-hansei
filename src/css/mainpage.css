@@ -1,0 +1,185 @@
+/* mainpage.css */
+
+body {
+    background: linear-gradient(to bottom, #f8f5ff 0%, #fff5f0 100%);
+    min-height: 100vh;
+}
+
+/* 헤더 */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: white;
+}
+
+
+.logo {
+    width: 60px; 
+    height: 60px;
+    border-radius: 50%;
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-size: cover; 
+    background-position: center; 
+}
+
+.login-btn {
+    padding: 8px 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* 히어로 섹션 */
+.hero-section {
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+}
+
+.illustration-area {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 42px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 서비스 섹션 */
+.services-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+}
+
+.section-title {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 12px;
+    padding: 40px 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.card-title {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.icon-placeholder {
+    /* 기존 스타일 통합 (크기 및 모양) */
+    width: 80px;
+    height: 80px;
+    background: #e8e8e8;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px; 
+}
+
+.icon-placeholder img {
+    max-width: 80%; 
+    max-height: 80%;
+    width: auto;
+    height: auto;
+    object-fit: contain; 
+}
+
+/* 미디어 쿼리 */
+@media (max-width: 968px) {
+    .service-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .service-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section {
+        padding: 40px 20px;
+    }
+
+    .illustration-area {
+        height: 200px;
+    }
+}
+
+/* logout */
+.header button {
+    /* 모든 버튼에 공통 스타일 적용 */
+    padding: 8px 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px; /* 버튼들 사이에 간격 추가 */
+}
+
+/* 마이페이지 버튼 스타일 (선택 사항: 색상 구분) */
+.mypage-btn {
+    border-color: #5bb5b0; /* 예시 색상 */
+    color: #5bb5b0;
+    font-weight: 500;
+}
+
+.a11y-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
