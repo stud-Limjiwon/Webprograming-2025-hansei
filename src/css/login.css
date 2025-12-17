@@ -1,9 +1,8 @@
-/* 로그인 페이지 레이아웃 */
-body {
-    background: #f5f5f5;
-    min-height: 100vh;
+.body {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
+    background: #f5f5f5;
 }
 
 .header {
@@ -12,52 +11,50 @@ body {
 }
 
 .logo {
-    display: block; 
-    width: 60px; 
+    display: block;
+    width: 60px;
     height: 60px;
-    border-radius: 50%;
-    background-image: url('../images/logo.png'); 
+    background-image: url('../images/logo.png');
     background-repeat: no-repeat;
-    background-size: cover; 
-    background-position: center; 
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
 }
 
 .login-container {
-    flex: 1;
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
     padding: 40px 20px;
 }
 
 .login-box {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    padding: 40px;
     width: 100%;
     max-width: 400px;
+    padding: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 폼 요소 */
 .form-group {
     margin-bottom: 24px;
 }
 
 .form-label {
     display: block;
+    margin-bottom: 8px;
     font-size: 14px;
     font-weight: 600;
     color: #333;
-    margin-bottom: 8px;
 }
-
 .form-input {
     width: 100%;
     padding: 12px 16px;
+    font-size: 14px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 14px;
     transition: border-color 0.3s;
 }
 
@@ -66,7 +63,6 @@ body {
     border-color: #5bb5b0;
 }
 
-/* 체크박스 */
 .checkbox-group {
     display: flex;
     align-items: center;
@@ -86,17 +82,16 @@ body {
     cursor: pointer;
 }
 
-/* 버튼 */
 .btn {
     width: 100%;
     padding: 14px;
-    border: none;
-    border-radius: 4px;
+    margin-bottom: 12px;
     font-size: 15px;
     font-weight: 600;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
     transition: opacity 0.3s;
-    margin-bottom: 12px;
 }
 
 .btn:hover {
@@ -104,52 +99,34 @@ body {
 }
 
 .btn-primary {
-    background: #5bb5b0;
     color: white;
+    background: #5bb5b0;
 }
 
-.btn-kakao {
-    background: #FEE500;
-    color: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.kakao-icon {
-    width: 20px;
-    height: 20px;
-    background: #000;
-    border-radius: 50%;
-    margin-right: 8px;
-}
-
-/* 링크 */
 .link-group {
-    text-align: center;
     margin-top: 20px;
+    text-align: center;
 }
 
 .link {
-    color: #666;
-    text-decoration: underline;
-    font-size: 14px;
-    cursor: pointer;
     display: block;
     margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .link:hover {
     color: #333;
 }
 
-/* 미디어 쿼리 */
 @media (max-width: 480px) {
-    .login-box {
-        padding: 30px 20px;
-    }
-
     .header {
         padding: 15px 20px;
+}
+
+.login-box {
+        padding: 30px 20px;
     }
 }

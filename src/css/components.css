@@ -1,6 +1,3 @@
-/* components.css */
-
-/* 1. 헤더 컴포넌트 */
 .header {
     display: flex;
     justify-content: space-between;
@@ -21,20 +18,25 @@
 
 .logo-text {
     font-size: 12px;
-    color: #333;
     font-weight: 500;
+    color: #333;
 }
 
 .my-info-btn {
     padding: 8px 16px;
+    font-size: 14px;
+    color: #333;
+    background: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    background: white;
-    font-size: 14px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* 2. 네비게이션 컴포넌트 */
+.my-info-btn:hover {
+    background-color: #f5f5f5;
+}
+
 .nav-bar {
     display: flex;
     align-items: center;
@@ -43,21 +45,20 @@
 
 .back-btn {
     font-size: 24px;
+    color: #333;
     background: none;
     border: none;
     cursor: pointer;
-    color: #333;
 }
 
 .page-title {
     flex: 1;
-    text-align: center;
+    margin-right: 24px;
     font-size: 24px;
     font-weight: 600;
-    margin-right: 24px;
+    text-align: center;
 }
 
-/* 3. 메인 아이콘 컴포넌트 */
 .main-icon {
     display: flex;
     justify-content: center;
@@ -65,28 +66,22 @@
 }
 
 .main-icon-img {
-    width: 80px;
-    height: 110px;
-    background-color: #2563eb;
-    border-radius: 40px; 
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 80px;
+    height: 110px;
+    background-color: #2563eb;
+    border-radius: 40px;
 }
 
-.eye-icon {
-    width: 50px;
-    height: 50px;
-    color: white;
-}
-
+.eye-icon,
 .wheelchair-icon {
     width: 50px;
     height: 50px;
     color: white;
 }
 
-/* 4. 기능 옵션 컴포넌트 */
 .feature-options {
     display: flex;
     justify-content: center;
@@ -103,40 +98,29 @@
 }
 
 .feature-option .icon {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #666;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 20px;
+    height: 20px;
     font-size: 12px;
     color: #666;
+    border: 2px solid #666;
+    border-radius: 50%;
 }
 
-/* 5. 카드 섹션 컴포넌트 */
 .cards {
     display: flex;
-    flex-direction: column;;
+    flex-direction: column;
     gap: 16px;
     margin-bottom: 40px;
 }
 
-@media (min-width: 480px) {
-    .cards {
-        flex-direction: row;
-    }
-    .card {
-        flex: 1;
-        width: auto;
-    }
-}
-
 .card {
     flex: 1;
+    padding: 50px 20px;
     background-color: #f0f7ff;
     border-radius: 16px;
-    padding: 50px 20px;
     text-align: center;
 }
 
@@ -149,34 +133,43 @@
 }
 
 .card-title {
+    margin-bottom: 12px;
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 12px;
     color: #333;
 }
 
 .card-desc {
     font-size: 14px;
-    color: #666;
     line-height: 1.5;
+    color: #666;
 }
 
-/* 6. 버튼 컴포넌트 */
 .use-btn {
     display: block;
     width: 280px;
     margin: 0 auto;
     padding: 16px;
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 30px;
     font-size: 18px;
     font-weight: 500;
+    color: white;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .use-btn:hover {
     background-color: #2563eb;
+}
+
+@media (min-width: 480px) {
+    .cards {
+    flex-direction: row;
+    }
+
+    .card {
+    width: auto;
+    }
 }
