@@ -12,8 +12,8 @@
 <body>
     <header class="header">
         <div class="logo"></div>
-        <div>
-            <button class="login-btn">로그인</button>
+        <div id="auth-area">
+            <button id="auth-btn" class="login-btn">로그인</button>
         </div>
     </header>
 
@@ -32,21 +32,21 @@
         <h2 class="section-title">유형을 선택하세요.</h2>
         <div class="service-cards">
             
-            <a href="visual.html" class="service-card"> 
+            <a href="func_visual.html" class="service-card">
                 <h3 class="card-title">시각 장애인</h3>
                 <div class="icon-placeholder">
                     <img src="images/visual.png" alt="시각 장애인 아이콘">
                 </div>
             </a>
             
-            <a href="hearing.html" class="service-card">
+            <a href="func_hearing.html" class="service-card">
                 <h3 class="card-title">청각 장애인</h3>
                 <div class="icon-placeholder">
                     <img src="images/hearing.png" alt="청각 장애인 아이콘">
                 </div>
             </a>
             
-            <a href="physical.html" class="service-card">
+            <a href="func_physical.html" class="service-card">
                 <h3 class="card-title">지체 장애인</h3>
                 <div class="icon-placeholder">
                     <img src="images/physical.png" alt="지체 장애인 아이콘">
@@ -55,6 +55,49 @@
             
         </div>
     </section>
+    <script>
+    const authArea = document.getElementById('auth-area');
+    const authBtn = document.getElementById('auth-btn');
+    
+    let isLoggedIn = false;
+
+    authBtn.addEventListener('click', function() {
+        if (!isLoggedIn) {
+            // --- 로그인 로직 ---
+            const confirmLogin = confirm("로그인하시겠습니까?");
+            if (confirmLogin) {
+                isLoggedIn = true;
+                authBtn.innerText = "로그아웃";
+                
+                // 1. '내 정보' 버튼 생성
+                const myPageBtn = document.createElement('button');
+                myPageBtn.innerText = "내 정보";
+                myPageBtn.id = "mypage-btn";
+                myPageBtn.className = "login-btn"; // 로그인 버튼과 동일한 디자인 적용
+                
+                // 2. 로그아웃 버튼 왼쪽에 삽입
+                authArea.insertBefore(myPageBtn, authBtn);
+                
+                alert("로그인되었습니다.");
+            }
+        } else {
+            // --- 로그아웃 로직 ---
+            const confirmLogout = confirm("로그아웃하시겠습니까?");
+            if (confirmLogout) {
+                isLoggedIn = false;
+                authBtn.innerText = "로그인";
+                
+                // '내 정보' 버튼 제거
+                const myPageBtn = document.getElementById('mypage-btn');
+                if (myPageBtn) myPageBtn.remove();
+                
+                alert("로그아웃되었습니다.");
+            }
+        }
+    });
+
+
+</script>
 </body>
 </html>
 

@@ -155,15 +155,20 @@ h1 {
 
 /* logout */
 .header button {
-    /* 모든 버튼에 공통 스타일 적용 */
     padding: 8px 20px;
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
-    margin-left: 10px; /* 버튼들 사이에 간격 추가 */
+    margin-left: 10px; 
+    transition: all 0.2s ease;
 }
+
+.header button:hover {
+    background: #f0f0f0; /* 마우스 올렸을 때 약간 어둡게 */
+}
+
 
 /* 마이페이지 버튼 스타일 (선택 사항: 색상 구분) */
 .mypage-btn {
