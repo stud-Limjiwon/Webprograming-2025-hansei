@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="css/mypage.css">
 </head>
 <body>
-    <div class="header">
-            <div class="logo">
-                <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
-                <span class="logo-text"></span>
-            </div>
+    <header class="header">
+        <div id="main_logo" class="logo" style="cursor: pointer;">
+            <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
+            <span class="logo-text"></span>
+        </div>
         <button class="logout-btn">로그아웃</button>
-    </div>
+    </header>
 
     <div class="container">
         <h1 class="page-title">마이페이지</h1>
@@ -22,23 +22,24 @@
         <div class="card">
             <div class="profile-section">
                 <div class="profile-image">
-                    <div class="profile-placeholder"></div>
+                    <img id="profile-icon" src="images/logo.png" alt="프로필 아이콘" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
                 </div>
                 <div class="profile-info">
                     <div class="profile-header">
-                        <div class="profile-name">성명</div>
-                        <button class="edit-btn">
+                        <div class="profile-name">정보</div>
+                        <button class="edit-btn" onclick="handleEdit()">
                             <span>✎</span> 편집
                         </button>
                     </div>
                     <div class="info-row">
-                        <div class="info-value">임 지원</div>
+                        <div class="info-value" id="display-name">임 지원</div>
+                        <div id="user-type-display" style="color: #3b82f6; font-weight: bold; font-size: 14px; margin-top: 4px;"></div>
                     </div>
                     <div class="info-row">
                         <div class="info-label">전화번호</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-value">010-1234-5678</div>
+                        <div class="info-value" id="display-phone">010-1234-5678</div>
                     </div>
                 </div>
             </div>
@@ -51,26 +52,24 @@
                     
                     <div class="device-info">
                         <div class="device-label">이름</div>
-                        <div class="device-value">Sophia</div>
+                        <div class="device-value" id="iot-name">임 지원</div>
                     </div>
 
                     <div class="device-info">
                         <div class="device-label">전화 번호</div>
-                        <div class="device-value">010-1234-5678</div>
+                        <div class="device-value" id="iot-phone">010-1234-5678</div>
                     </div>
 
                     <div class="device-info">
                         <div class="device-label">이메일</div>
-                        <div class="device-value">sophia@example.com</div>
+                        <div class="device-value" id="display-email">sophia@example.com</div>
                     </div>
 
                     <div class="device-info">
                         <div class="device-label">관광객 기기 번호</div>
                         <div class="device-value">IOT-TEST-001</div>
                     </div>
-
-                    <button class="register-btn">추가</button>
-                </div>
+                    </div>
 
                 <div class="iot-right">
                     <div class="toggle-row">
@@ -89,19 +88,84 @@
             </div>
         </div>
     </div>
+    
     <script>
-    // 마이페이지의 로그아웃 버튼을 가져옵니다.
+    const mainLogo = document.getElementById('main_logo');
     const logoutBtn = document.querySelector('.logout-btn');
+    const typeDisplay = document.getElementById('user-type-display');
 
+    // 초기 데이터 로드 (이름, 전화번호, 이메일, 장애유형)
+    window.onload = function() {
+        const savedName = localStorage.getItem('userName') || "임 지원";
+        const savedPhone = localStorage.getItem('userPhone') || "010-1234-5678";
+        const savedEmail = localStorage.getItem('userEmail') || "로그인 정보 없음";
+        const savedType = localStorage.getItem('userType');
+        const profileIcon = document.getElementById('profile-icon');
+        
+        // 화면에 적용
+        document.getElementById('display-name').innerText = savedName;
+        document.getElementById('iot-name').innerText = savedName;
+        document.getElementById('display-phone').innerText = savedPhone;
+        document.getElementById('iot-phone').innerText = savedPhone;
+        document.getElementById('display-email').innerText = savedEmail;
+
+        if (savedType && typeDisplay) {
+            typeDisplay.innerText = savedType;
+
+            if (savedType === '시각장애인') {
+                profileIcon.src = 'images/visual.png';
+            } else if (savedType === '청각장애인') {
+                profileIcon.src = 'images/hearing.png';
+            } else if (savedType === '지체장애인') {
+                profileIcon.src = 'images/physical.png';
+            }
+        } else {
+            // 등록된 정보가 없을 때 기본 이미지
+            profileIcon.src = 'images/logo.png';
+        }
+    };
+
+    // 1. 편집 버튼 기능 (성명, 전화번호 수정 및 연동)
+    function handleEdit() {
+        const newName = prompt("수정할 성명을 입력하세요:", document.getElementById('display-name').innerText);
+        if (newName === null) return; // 취소 시 중단
+
+        const newPhone = prompt("수정할 전화번호를 입력하세요:", document.getElementById('display-phone').innerText);
+        if (newPhone === null) return;
+
+        // 화면 업데이트
+        document.getElementById('display-name').innerText = newName;
+        document.getElementById('iot-name').innerText = newName;
+        document.getElementById('display-phone').innerText = newPhone;
+        document.getElementById('iot-phone').innerText = newPhone;
+
+        // 저장
+        localStorage.setItem('userName', newName);
+        localStorage.setItem('userPhone', newPhone);
+        
+        alert("정보가 수정되었습니다.");
+    }
+
+    // 2. 로고 클릭 시 메인 페이지 이동
+    if (mainLogo) {
+        mainLogo.addEventListener('click', function() {
+            window.location.href = 'mainpage.html';
+        });
+    }
+
+    // 3. 로그아웃 버튼 클릭 시
     if (logoutBtn) {
         logoutBtn.addEventListener('click', function() {
-            const confirmLogout = confirm("로그아웃하시겠습니까? 메인 페이지로 이동합니다.");
-            if (confirmLogout) {
-                // 메인 페이지로 이동
+            if (confirm("로그아웃하시겠습니까?")) {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('userType');
+                // 이름과 전화번호 저장 데이터는 유지하고 싶다면 아래 두 줄은 주석 처리하세요
+                // localStorage.removeItem('userName'); 
+                // localStorage.removeItem('userPhone');
                 window.location.href = 'mainpage.html';
             }
         });
     }
-</script>
+    </script>
 </body>
 </html>

@@ -10,20 +10,20 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="logo">
+            <div class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
                 <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
                 <span class="logo-text"></span>
             </div>
-            <button class="my-info-btn">내 정보</button>
+            <button class="my-info-btn" onclick="location.href='mypage.html'">내 정보</button>
         </div>
 
         <div class="nav-bar">
-            <button class="back-btn">←</button>
+            <button class="back-btn" onclick="history.back()">←</button>
             <h1 class="page-title">지원 기능</h1>
         </div>
 
         <div class="main-icon">
-            <div class="main-icon-box">
+            <div class="main-icon-img">
                 <img src="images/visual.png" alt="Visual Icon">
             </div>
         </div>
@@ -46,21 +46,28 @@
         <div class="cards">
             <div class="card">
                 <h3 class="card-title">스마트폰 연동</h3>
-                <p class="card-desc">블루투스를 통해 자동으로 설정이 연동됩니다.</p>
+                <p class="card-desc">블루투스를 통해 자동으로 개인 설정이 연동됩니다.</p>
             </div>
             <div class="card">
                 <h3 class="card-title">자동 인식</h3>
                 <p class="card-desc">키오스크나 은행 기기에 가까이 가면 자동으로 연결됩니다.</p>
             </div>
             <div class="card">
-
                 <h3 class="card-title">서비스 이용</h3>
                 <p class="card-desc">키오스크나 은행에서 편리하게 이용하세요.</p>
             </div>
         </div>
 
-        <button class="use-btn">이용하기</button>
+        <button class="use-btn" onclick="handleUseBtnClick()">이용하기</button>
     </div>
 
-    </body>
+    <script>
+    function handleUseBtnClick() {
+        if (confirm("등록하시겠습니까?")) {
+            localStorage.setItem('userType', '시각장애인'); // 타입 저장
+            location.href = 'mypage.html';
+        }
+    }
+    </script>
+</body>
 </html>

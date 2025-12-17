@@ -11,7 +11,7 @@
 
 <body>
     <header class="header">
-        <div class="logo"></div>
+        <div id="main_logo" class="logo" style="cursor: pointer;"></div>
         <div id="auth-area">
             <button id="auth-btn" class="login-btn">로그인</button>
         </div>
@@ -58,46 +58,51 @@
     <script>
     const authArea = document.getElementById('auth-area');
     const authBtn = document.getElementById('auth-btn');
-    
-    let isLoggedIn = false;
+    const mainLogo = document.getElementById('main_logo');
 
+    // 1. 페이지 로드 시 로그인 상태 확인 (모든 페이지 공통 로직)
+    window.onload = function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn === 'true') {
+            showLoggedInUI();
+        }
+    };
+
+    // 2. 로고 클릭 시 메인 페이지로 이동
+    if (mainLogo) {
+        mainLogo.addEventListener('click', function() {
+            window.location.href = 'mainpage.html';
+        });
+    }
+
+    // 3. 로그인/로그아웃 버튼 클릭 이벤트
     authBtn.addEventListener('click', function() {
-        if (!isLoggedIn) {
-            // --- 로그인 로직 ---
-            const confirmLogin = confirm("로그인하시겠습니까?");
-            if (confirmLogin) {
-                isLoggedIn = true;
-                authBtn.innerText = "로그아웃";
-                
-                // 1. '내 정보' 버튼 생성
-                const myPageBtn = document.createElement('button');
-                myPageBtn.innerText = "내 정보";
-                myPageBtn.id = "mypage-btn";
-                myPageBtn.className = "login-btn"; // 로그인 버튼과 동일한 디자인 적용
-                // '내 정보' 버튼 클릭 시 mypage.html로 이동
-                myPageBtn.onclick = function() {
-                    window.location.href = 'mypage.html';
-                };
-                authArea.insertBefore(myPageBtn, authBtn);
-                alert("로그인되었습니다.");
-            }
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn !== 'true') {
+            window.location.href = 'login.html'; // 로그인 페이지로 이동
         } else {
-            // --- 로그아웃 로직 ---
-            const confirmLogout = confirm("로그아웃하시겠습니까?");
-            if (confirmLogout) {
-                isLoggedIn = false;
-                authBtn.innerText = "로그인";
-                
-                // '내 정보' 버튼 제거
-                const myPageBtn = document.getElementById('mypage-btn');
-                if (myPageBtn) myPageBtn.remove();
-                
-                alert("로그아웃되었습니다.");
+            if (confirm("로그아웃하시겠습니까?")) {
+                localStorage.removeItem('isLoggedIn');
+                location.reload(); // 새로고침하여 초기 상태로 복구
             }
         }
     });
 
-
+    // 로그인 성공 시 나타날 UI 함수
+    function showLoggedInUI() {
+        authBtn.innerText = "로그아웃";
+        
+        const myPageBtn = document.createElement('button');
+        myPageBtn.innerText = "내 정보";
+        myPageBtn.id = "mypage-btn";
+        myPageBtn.className = "login-btn"; 
+        myPageBtn.onclick = function() {
+            window.location.href = 'mypage.html';
+        };
+        
+        // [내 정보] 버튼을 [로그아웃] 버튼 앞에 배치
+        authArea.insertBefore(myPageBtn, authBtn);
+    }
 </script>
 </body>
 </html>
