@@ -62,6 +62,15 @@
     </div>
     
     <script>
+    (function checkLogin() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        
+        // 로그인 상태가 아니면 (값이 없거나 'true'가 아니면)
+        if (isLoggedIn !== 'true') {
+            alert("로그인이 필요한 서비스입니다. 메인 페이지로 이동합니다.");
+            window.location.href = 'mainpage.html'; // 메인으로 강제 이동
+        }
+    })();
         function handleUseBtnClick() {
             if (confirm("등록하시겠습니까?")) {
                 localStorage.setItem('userType', '지체장애인'); // 타입 저장

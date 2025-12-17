@@ -11,7 +11,6 @@
     <header class="header">
         <div id="main_logo" class="logo" style="cursor: pointer;">
             <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
-            <span class="logo-text"></span>
         </div>
         <button class="logout-btn">로그아웃</button>
     </header>
@@ -32,14 +31,14 @@
                         </button>
                     </div>
                     <div class="info-row">
-                        <div class="info-value" id="display-name">임 지원</div>
-                        <div id="user-type-display" style="color: #3b82f6; font-weight: bold; font-size: 14px; margin-top: 4px;"></div>
+                        <div class="info-value" id="display-name">등록해주세요</div>
+                        <div id="user-type-display" style="color: #3b82f6; font-weight: bold; font-size: 14px; margin-top: 4px;">등록된 유형 없음</div>
                     </div>
                     <div class="info-row">
                         <div class="info-label">전화번호</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-value" id="display-phone">010-1234-5678</div>
+                        <div class="info-value" id="display-phone">등록해주세요</div>
                     </div>
                 </div>
             </div>
@@ -52,24 +51,24 @@
                     
                     <div class="device-info">
                         <div class="device-label">이름</div>
-                        <div class="device-value" id="iot-name">임 지원</div>
+                        <div class="device-value" id="iot-name">등록해주세요</div>
                     </div>
 
                     <div class="device-info">
                         <div class="device-label">전화 번호</div>
-                        <div class="device-value" id="iot-phone">010-1234-5678</div>
+                        <div class="device-value" id="iot-phone">등록해주세요</div>
                     </div>
 
                     <div class="device-info">
                         <div class="device-label">이메일</div>
-                        <div class="device-value" id="display-email">sophia@example.com</div>
+                        <div class="device-value" id="display-email">불러오는 중...</div>
                     </div>
 
                     <div class="device-info">
                         <div class="device-label">관광객 기기 번호</div>
                         <div class="device-value">IOT-TEST-001</div>
                     </div>
-                    </div>
+                </div>
 
                 <div class="iot-right">
                     <div class="toggle-row">
@@ -90,82 +89,80 @@
     </div>
     
     <script>
-    const mainLogo = document.getElementById('main_logo');
-    const logoutBtn = document.querySelector('.logout-btn');
-    const typeDisplay = document.getElementById('user-type-display');
-
-    // 초기 데이터 로드 (이름, 전화번호, 이메일, 장애유형)
-    window.onload = function() {
-        const savedName = localStorage.getItem('userName') || "임 지원";
-        const savedPhone = localStorage.getItem('userPhone') || "010-1234-5678";
-        const savedEmail = localStorage.getItem('userEmail') || "로그인 정보 없음";
-        const savedType = localStorage.getItem('userType');
-        const profileIcon = document.getElementById('profile-icon');
-        
-        // 화면에 적용
-        document.getElementById('display-name').innerText = savedName;
-        document.getElementById('iot-name').innerText = savedName;
-        document.getElementById('display-phone').innerText = savedPhone;
-        document.getElementById('iot-phone').innerText = savedPhone;
-        document.getElementById('display-email').innerText = savedEmail;
-
-        if (savedType && typeDisplay) {
-            typeDisplay.innerText = savedType;
-
-            if (savedType === '시각장애인') {
-                profileIcon.src = 'images/visual.png';
-            } else if (savedType === '청각장애인') {
-                profileIcon.src = 'images/hearing.png';
-            } else if (savedType === '지체장애인') {
-                profileIcon.src = 'images/physical.png';
+        // 로그인 체크
+        (function checkLogin() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                alert("로그인이 필요한 서비스입니다.");
+                window.location.href = 'mainpage.html';
             }
-        } else {
-            // 등록된 정보가 없을 때 기본 이미지
-            profileIcon.src = 'images/logo.png';
+        })();
+
+        // 데이터 로드 (저장된 값이 있으면 덮어씌우고, 없으면 그대로 유지)
+        window.onload = function() {
+            const savedEmail = localStorage.getItem('userEmail') || "로그인 정보 없음";
+            const savedName = localStorage.getItem('userName');
+            const savedPhone = localStorage.getItem('userPhone');
+            const savedType = localStorage.getItem('userType') || "등록된 유형 없음";
+    
+    // 1. 텍스트 데이터 반영
+            if (savedName && savedName !== "null") {
+                document.getElementById('display-name').innerText = savedName;
+                document.getElementById('iot-name').innerText = savedName;
+            }
+            if (savedPhone && savedPhone !== "null") {
+                document.getElementById('display-phone').innerText = savedPhone;
+                document.getElementById('iot-phone').innerText = savedPhone;
+            }
+            document.getElementById('display-email').innerText = savedEmail;
+            const typeDisplay = document.getElementById('user-type-display');
+            if (typeDisplay) typeDisplay.innerText = savedType;
+
+    // 2. 프로필 아이콘 설정 및 오류 방지
+            const profileIcon = document.getElementById('profile-icon');
+
+    // [중요] 이미지를 불러오지 못했을 때 실행될 코드
+            profileIcon.onerror = function() {
+                console.log("이미지를 찾을 수 없어 로고로 대체합니다.");
+            this.src = 'images/logo.png'; 
+            };
+
+            if (savedType === '시각장애인') profileIcon.src = 'images/visual.png';
+            else if (savedType === '청각장애인') profileIcon.src = 'images/hearing.png';
+            else if (savedType === '지체장애인') profileIcon.src = 'images/physical.png';
+            else profileIcon.src = 'images/logo.png';
+        };
+        // 편집 기능
+        function handleEdit() {
+            const currentName = document.getElementById('display-name').innerText;
+            const currentPhone = document.getElementById('display-phone').innerText;
+
+            const initialName = (currentName === "등록해주세요") ? "" : currentName;
+            const initialPhone = (currentPhone === "등록해주세요") ? "" : currentPhone;
+
+            const newName = prompt("성명을 입력하세요:", initialName);
+            if (!newName) return;
+            const newPhone = prompt("전화번호를 입력하세요:", initialPhone);
+            if (!newPhone) return;
+
+            localStorage.setItem('userName', newName);
+            localStorage.setItem('userPhone', newPhone);
+            location.reload();
         }
-    };
 
-    // 1. 편집 버튼 기능 (성명, 전화번호 수정 및 연동)
-    function handleEdit() {
-        const newName = prompt("수정할 성명을 입력하세요:", document.getElementById('display-name').innerText);
-        if (newName === null) return; // 취소 시 중단
-
-        const newPhone = prompt("수정할 전화번호를 입력하세요:", document.getElementById('display-phone').innerText);
-        if (newPhone === null) return;
-
-        // 화면 업데이트
-        document.getElementById('display-name').innerText = newName;
-        document.getElementById('iot-name').innerText = newName;
-        document.getElementById('display-phone').innerText = newPhone;
-        document.getElementById('iot-phone').innerText = newPhone;
-
-        // 저장
-        localStorage.setItem('userName', newName);
-        localStorage.setItem('userPhone', newPhone);
-        
-        alert("정보가 수정되었습니다.");
-    }
-
-    // 2. 로고 클릭 시 메인 페이지 이동
-    if (mainLogo) {
-        mainLogo.addEventListener('click', function() {
-            window.location.href = 'mainpage.html';
-        });
-    }
-
-    // 3. 로그아웃 버튼 클릭 시
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', function() {
-            if (confirm("로그아웃하시겠습니까?")) {
+        // 로그아웃
+        document.querySelector('.logout-btn').addEventListener('click', function() {
+            if (confirm("로그아웃 하시겠습니까?")) {
                 localStorage.removeItem('isLoggedIn');
                 localStorage.removeItem('userType');
-                // 이름과 전화번호 저장 데이터는 유지하고 싶다면 아래 두 줄은 주석 처리하세요
-                // localStorage.removeItem('userName'); 
-                // localStorage.removeItem('userPhone');
+                localStorage.removeItem('userName');
+                localStorage.removeItem('userPhone');
                 window.location.href = 'mainpage.html';
             }
         });
-    }
+
+        // 로고 클릭
+        document.getElementById('main_logo').onclick = () => location.href='mainpage.html';
     </script>
 </body>
 </html>
