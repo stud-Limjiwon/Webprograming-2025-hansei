@@ -74,10 +74,11 @@
                 myPageBtn.innerText = "내 정보";
                 myPageBtn.id = "mypage-btn";
                 myPageBtn.className = "login-btn"; // 로그인 버튼과 동일한 디자인 적용
-                
-                // 2. 로그아웃 버튼 왼쪽에 삽입
+                // '내 정보' 버튼 클릭 시 mypage.html로 이동
+                myPageBtn.onclick = function() {
+                    window.location.href = 'mypage.html';
+                };
                 authArea.insertBefore(myPageBtn, authBtn);
-                
                 alert("로그인되었습니다.");
             }
         } else {

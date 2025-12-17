@@ -89,5 +89,19 @@
             </div>
         </div>
     </div>
+    <script>
+    // 마이페이지의 로그아웃 버튼을 가져옵니다.
+    const logoutBtn = document.querySelector('.logout-btn');
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function() {
+            const confirmLogout = confirm("로그아웃하시겠습니까? 메인 페이지로 이동합니다.");
+            if (confirmLogout) {
+                // 메인 페이지로 이동
+                window.location.href = 'mainpage.html';
+            }
+        });
+    }
+</script>
 </body>
 </html>
