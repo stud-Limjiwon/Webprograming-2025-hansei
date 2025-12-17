@@ -150,7 +150,7 @@
         // [4] 로그아웃 로직
         document.getElementById('logout-btn').addEventListener('click', function() {
             if (confirm("로그아웃 하시겠습니까?")) {
-                localStorage.clear(); // 전체 초기화하여 보안 강화
+                localStorage.clear(); // 전체 초기화
                 location.href = 'mainpage.html';
             }
         });
