@@ -9,10 +9,10 @@
 </head>
 <body>
     <header class="header">
-        <div id="main_logo" class="logo" style="cursor: pointer;">
+        <div id="main_logo" class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
             <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
         </div>
-        <button class="logout-btn">로그아웃</button>
+        <button class="logout-btn" id="logout-btn">로그아웃</button>
     </header>
 
     <div class="container">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="profile-info">
                     <div class="profile-header">
-                        <div class="profile-name">정보</div>
+                        <div class="profile-name">개인 정보</div>
                         <button class="edit-btn" onclick="handleEdit()">
                             <span>✎</span> 편집
                         </button>
@@ -34,10 +34,8 @@
                         <div class="info-value" id="display-name">등록해주세요</div>
                         <div id="user-type-display" style="color: #3b82f6; font-weight: bold; font-size: 14px; margin-top: 4px;">등록된 유형 없음</div>
                     </div>
-                    <div class="info-row">
+                    <div class="info-row" style="margin-top: 10px;">
                         <div class="info-label">전화번호</div>
-                    </div>
-                    <div class="info-row">
                         <div class="info-value" id="display-phone">등록해주세요</div>
                     </div>
                 </div>
@@ -50,23 +48,23 @@
                     <h2 class="iot-title">IoT 기기 연동</h2>
                     
                     <div class="device-info">
-                        <div class="device-label">이름</div>
+                        <div class="device-label">연동 이름</div>
                         <div class="device-value" id="iot-name">등록해주세요</div>
                     </div>
 
                     <div class="device-info">
-                        <div class="device-label">전화 번호</div>
+                        <div class="device-label">연동 번호</div>
                         <div class="device-value" id="iot-phone">등록해주세요</div>
                     </div>
 
                     <div class="device-info">
-                        <div class="device-label">이메일</div>
+                        <div class="device-label">계정 이메일</div>
                         <div class="device-value" id="display-email">불러오는 중...</div>
                     </div>
 
                     <div class="device-info">
-                        <div class="device-label">관광객 기기 번호</div>
-                        <div class="device-value">IOT-TEST-001</div>
+                        <div class="device-label">IoT 기기 번호</div>
+                        <div class="device-value">IOT-BRIDGE-001</div>
                     </div>
                 </div>
 
@@ -76,11 +74,11 @@
                         <div class="toggle-switch" onclick="this.classList.toggle('off')"></div>
                     </div>
                     <div class="toggle-row">
-                        <div class="toggle-label">블루투스</div>
+                        <div class="toggle-label">Bluetooth</div>
                         <div class="toggle-switch" onclick="this.classList.toggle('off')"></div>
                     </div>
                     <div class="toggle-row">
-                        <div class="toggle-label">위치정보</div>
+                        <div class="toggle-label">GPS</div>
                         <div class="toggle-switch" onclick="this.classList.toggle('off')"></div>
                     </div>
                 </div>
@@ -89,23 +87,22 @@
     </div>
     
     <script>
-        // 로그인 체크
+        // [1] 로그인 즉시 체크
         (function checkLogin() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (isLoggedIn !== 'true') {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
                 alert("로그인이 필요한 서비스입니다.");
-                window.location.href = 'mainpage.html';
+                location.href = 'mainpage.html';
             }
         })();
 
-        // 데이터 로드 (저장된 값이 있으면 덮어씌우고, 없으면 그대로 유지)
+        // [2] 페이지 로드 시 데이터 반영
         window.onload = function() {
-            const savedEmail = localStorage.getItem('userEmail') || "로그인 정보 없음";
+            const savedEmail = localStorage.getItem('userEmail') || "정보 없음";
             const savedName = localStorage.getItem('userName');
             const savedPhone = localStorage.getItem('userPhone');
-            const savedType = localStorage.getItem('userType') || "등록된 유형 없음";
+            const savedType = localStorage.getItem('userType') || "미선택";
     
-    // 1. 텍스트 데이터 반영
+            // 이름 및 전화번호 반영
             if (savedName && savedName !== "null") {
                 document.getElementById('display-name').innerText = savedName;
                 document.getElementById('iot-name').innerText = savedName;
@@ -115,54 +112,48 @@
                 document.getElementById('iot-phone').innerText = savedPhone;
             }
             document.getElementById('display-email').innerText = savedEmail;
-            const typeDisplay = document.getElementById('user-type-display');
-            if (typeDisplay) typeDisplay.innerText = savedType;
+            document.getElementById('user-type-display').innerText = savedType;
 
-    // 2. 프로필 아이콘 설정 및 오류 방지
+            // 프로필 아이콘 설정 및 오류 핸들링
             const profileIcon = document.getElementById('profile-icon');
-
-    // [중요] 이미지를 불러오지 못했을 때 실행될 코드
             profileIcon.onerror = function() {
-                console.log("이미지를 찾을 수 없어 로고로 대체합니다.");
-            this.src = 'images/logo.png'; 
+                this.src = 'images/logo.png'; 
             };
 
-            if (savedType === '시각장애인') profileIcon.src = 'images/visual.png';
-            else if (savedType === '청각장애인') profileIcon.src = 'images/hearing.png';
-            else if (savedType === '지체장애인') profileIcon.src = 'images/physical.png';
-            else profileIcon.src = 'images/logo.png';
+            const iconMap = {
+                '시각장애인': 'images/visual.png',
+                '청각장애인': 'images/hearing.png',
+                '지체장애인': 'images/physical.png'
+            };
+            profileIcon.src = iconMap[savedType] || 'images/logo.png';
         };
-        // 편집 기능
+
+        // [3] 편집 기능
         function handleEdit() {
             const currentName = document.getElementById('display-name').innerText;
             const currentPhone = document.getElementById('display-phone').innerText;
 
-            const initialName = (currentName === "등록해주세요") ? "" : currentName;
-            const initialPhone = (currentPhone === "등록해주세요") ? "" : currentPhone;
+            const nameValue = (currentName === "등록해주세요") ? "" : currentName;
+            const phoneValue = (currentPhone === "등록해주세요") ? "" : currentPhone;
 
-            const newName = prompt("성명을 입력하세요:", initialName);
-            if (!newName) return;
-            const newPhone = prompt("전화번호를 입력하세요:", initialPhone);
-            if (!newPhone) return;
+            const newName = prompt("성명을 입력하세요:", nameValue);
+            if (newName === null) return; // 취소 클릭 시
 
-            localStorage.setItem('userName', newName);
-            localStorage.setItem('userPhone', newPhone);
+            const newPhone = prompt("전화번호를 입력하세요:", phoneValue);
+            if (newPhone === null) return;
+
+            localStorage.setItem('userName', newName || "등록해주세요");
+            localStorage.setItem('userPhone', newPhone || "등록해주세요");
             location.reload();
         }
 
-        // 로그아웃
-        document.querySelector('.logout-btn').addEventListener('click', function() {
+        // [4] 로그아웃 로직
+        document.getElementById('logout-btn').addEventListener('click', function() {
             if (confirm("로그아웃 하시겠습니까?")) {
-                localStorage.removeItem('isLoggedIn');
-                localStorage.removeItem('userType');
-                localStorage.removeItem('userName');
-                localStorage.removeItem('userPhone');
-                window.location.href = 'mainpage.html';
+                localStorage.clear(); // 전체 초기화하여 보안 강화
+                location.href = 'mainpage.html';
             }
         });
-
-        // 로고 클릭
-        document.getElementById('main_logo').onclick = () => location.href='mainpage.html';
     </script>
 </body>
 </html>

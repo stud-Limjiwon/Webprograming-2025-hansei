@@ -3,80 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BRIDGE - physical</title>
+    <title>BRIDGE - 지체장애 지원</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
+        <header class="header">
             <div class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
-                <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
-                <span class="logo-text"></span>
+                <img src="images/logo.png" alt="BRIDGE 로고" class="logo-image">
             </div>
             <button class="my-info-btn" onclick="location.href='mypage.html'">내 정보</button>
-        </div>
+        </header>
 
-        <div class="nav-bar">
+        <nav class="nav-bar">
             <button class="back-btn" onclick="history.back()">←</button>
             <h1 class="page-title">지원 기능</h1>
-        </div>
+        </nav>
         
-        <div class="main-icon">
+        <section class="main-icon">
             <div class="main-icon-img">
-                <img src="images/physical.png" alt="Physical Icon">
+                <img src="images/physical.png" alt="지체장애 지원 아이콘">
             </div>
-        </div>
+        </section>
 
         <div class="feature-options">
-            <div class="feature-option">
-                <span class="icon"></span>
-                <span>높이 조절</span> 
-            </div>
-            <div class="feature-option">
-                <span class="icon"></span>
-                <span>휠체어 접근</span> 
-            </div>
-            <div class="feature-option">
-                <span class="icon"></span>
-                <span>큰 버튼</span> 
-            </div>
+            <div class="feature-option"><span>높이 조절</span></div>
+            <div class="feature-option"><span>휠체어 접근</span></div>
+            <div class="feature-option"><span>큰 버튼</span></div>
         </div>
 
         <div class="cards">
             <div class="card">
-                <h3 class="card-title">스마트폰 연동</h3>
-                <p class="card-desc">블루투스를 통해 자동으로 설정이 연동됩니다.</p>
+                <h3>스마트폰 연동</h3>
+                <p>블루투스를 통해 자동으로 설정이 연동됩니다.</p>
             </div>
             <div class="card">
-                <h3 class="card-title">자동 인식</h3>
-                <p class="card-desc">키오스크나 은행 기기에 가까이 가면 자동으로 연결됩니다.</p>
+                <h3>자동 인식</h3>
+                <p>키오스크나 은행 기기에 가까이 가면 자동으로 연결됩니다.</p>
             </div>
             <div class="card">
-                <h3 class="card-title">서비스 이용</h3>
-                <p class="card-desc">키오스크나 은행에서 편리하게 이용하세요.</p>
+                <h3>서비스 이용</h3>
+                <p>키오스크나 은행에서 편리하게 이용하세요.</p>
             </div>
         </div>
 
-        <button class="use-btn" onclick="handleUseBtnClick()">이용하기</button>
+        <button class="use-btn" onclick="handleRegister()">이용하기</button>
     </div>
     
     <script>
-    (function checkLogin() {
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        
-        // 로그인 상태가 아니면 (값이 없거나 'true'가 아니면)
-        if (isLoggedIn !== 'true') {
-            alert("로그인이 필요한 서비스입니다. 메인 페이지로 이동합니다.");
-            window.location.href = 'mainpage.html'; // 메인으로 강제 이동
-        }
-    })();
-        function handleUseBtnClick() {
-            if (confirm("등록하시겠습니까?")) {
-                localStorage.setItem('userType', '지체장애인'); // 타입 저장
+        // 1. 로그인 상태 체크 (즉시 실행)
+        (function() {
+            if (localStorage.getItem('isLoggedIn') !== 'true') {
+                alert("로그인이 필요한 서비스입니다.");
+                location.href = 'mainpage.html';
+            }
+        })();
+
+        // 2. 이용하기 버튼 클릭 시 (유형 저장 후 이동)
+        function handleRegister() {
+            if (confirm("지체장애인 지원 기능을 등록하시겠습니까?")) {
+                localStorage.setItem('userType', '지체장애인');
+                alert("등록이 완료되었습니다. 마이페이지로 이동합니다.");
                 location.href = 'mypage.html';
+            }
         }
-    }
     </script>
 </body>
 </html>

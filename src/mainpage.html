@@ -3,113 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>장애인을 위한 IoT 연동 서비스</title>
+    <title>BRIDGE - 장애인 지원 IoT 서비스</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/mainpage.css">
 </head>
 
-
 <body>
     <header class="header">
-        <div id="main_logo" class="logo" style="cursor: pointer;"></div>
-        <div id="auth-area">
-            <button id="auth-btn" class="login-btn">로그인</button>
+        <div id="main_logo" class="logo" onclick="location.href='mainpage.html'">
+            <img src="images/logo.png" alt="BRIDGE 로고" class="logo-image">
         </div>
+    
+        <div id="auth-area">
+            </div>
     </header>
 
-    <section class="hero-section">
-        <div class="illustration-area">
-            <img src="images/mainpage.png" alt="스마트폰, 키오스크, 휠체어를 사용하는 사람들을 연결하는 IoT 장치 일러스트">
-        </div>
-        <h1>장애인을 위한 IoT 연동 서비스</h1>
-        <p class="subtitle">
-            스마트폰과 연동하여 키오스크와 은행 업무를 더욱 편리하게 이용하세요.<br>
-            장애 유형에 맞는 맞춤형 지원을 제공합니다.
-        </p>
-    </section>
+    <main>
+        <section class="hero-section">
+            <div class="illustration-area">
+                <img src="images/mainpage.png" alt="서비스 소개 일러스트">
+            </div>
+            <h1>장애인을 위한 IoT 연동 서비스</h1>
+            <p class="subtitle">
+                스마트폰과 연동하여 키오스크와 은행 업무를 더욱 편리하게 이용하세요.<br>
+                장애 유형에 맞는 맞춤형 지원을 제공합니다.
+            </p>
+        </section>
 
-    <section class="services-section">
-        <h2 class="section-title">유형을 선택하세요.</h2>
-        <div class="service-cards">
-            
-            <a href="func_visual.html" class="service-card">
-                <h3 class="card-title">시각 장애인</h3>
-                <div class="icon-placeholder">
-                    <img src="images/visual.png" alt="시각 장애인 아이콘">
-                </div>
-            </a>
-            
-            <a href="func_hearing.html" class="service-card">
-                <h3 class="card-title">청각 장애인</h3>
-                <div class="icon-placeholder">
-                    <img src="images/hearing.png" alt="청각 장애인 아이콘">
-                </div>
-            </a>
-            
-            <a href="func_physical.html" class="service-card">
-                <h3 class="card-title">지체 장애인</h3>
-                <div class="icon-placeholder">
-                    <img src="images/physical.png" alt="지체 장애인 아이콘">
-                </div>
-            </a>
-            
-        </div>
-    </section>
-<script>
-    window.onload = function() {
-        renderAuthButtons();
-    };
+        <section class="services-section">
+            <h2 class="section-title">유형을 선택하세요.</h2>
+            <div class="service-cards">
+                <a href="func_visual.html" class="service-card">
+                    <h3 class="card-title">시각 장애인</h3>
+                    <div class="icon-placeholder">
+                        <img src="images/visual.png" alt="시각 장애인 아이콘">
+                    </div>
+                </a>
+                
+                <a href="func_hearing.html" class="service-card">
+                    <h3 class="card-title">청각 장애인</h3>
+                    <div class="icon-placeholder">
+                        <img src="images/hearing.png" alt="청각 장애인 아이콘">
+                    </div>
+                </a>
+                
+                <a href="func_physical.html" class="service-card">
+                    <h3 class="card-title">지체 장애인</h3>
+                    <div class="icon-placeholder">
+                        <img src="images/physical.png" alt="지체 장애인 아이콘">
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
 
-    // 1. 로그인 상태에 따라 헤더의 버튼을 '로그인' 또는 '내 정보/로그아웃'으로 변경
-    function renderAuthButtons() {
-        const authArea = document.getElementById('auth-area');
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    <script>
+        window.onload = function() {
+            renderAuthButtons();
+            setupServiceCards();
+        };
 
-        if (isLoggedIn) {
-            authArea.innerHTML = `
-                <button onclick="location.href='mypage.html'" class="login-btn" style="margin-right:8px;">내 정보</button>
-                <button onclick="handleLogout()" class="login-btn" style="background-color: #666;">로그아웃</button>
-            `;
-        } else {
-            authArea.innerHTML = `
-                <button id="auth-btn" class="login-btn" onclick="location.href='login.html'">로그인</button>
-            `;
+        // 1. 로그인 상태에 따른 버튼 렌더링
+        function renderAuthButtons() {
+            const authArea = document.getElementById('auth-area');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            if (isLoggedIn) {
+                authArea.innerHTML = `
+                    <button onclick="location.href='mypage.html'" class="login-btn" style="margin-right:8px;">내 정보</button>
+                    <button onclick="handleLogout()" class="login-btn">로그아웃</button> 
+                `; 
+            } else {
+                authArea.innerHTML = `
+                    <button class="login-btn" onclick="location.href='login.html'">로그인</button>
+                `;
+            }
         }
-    }
 
-    // 2. 서비스 카드 클릭 시 로그인 여부 확인
-    // HTML의 <a> 태그 대신 이 함수를 사용하도록 수정하는 것이 좋습니다.
-    function checkAuth(e, targetUrl) {
-        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-        
-        if (!isLoggedIn) {
-            e.preventDefault(); // 페이지 이동을 막음
-            alert("로그인이 필요한 서비스입니다. 로그인 페이지로 이동합니다.");
-            location.href = 'login.html';
+        // 2. 서비스 카드 클릭 시 권한 체크
+        function setupServiceCards() {
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (localStorage.getItem('isLoggedIn') !== 'true') {
+                        e.preventDefault();
+                        alert("로그인이 필요한 서비스입니다.");
+                        location.href = 'login.html';
+                    }
+                });
+            });
         }
-    }
 
-    // 3. 로그아웃 함수 (개인정보는 남기고 상태만 변경)
-    function handleLogout() {
-        if (confirm("로그아웃 하시겠습니까?")) {
-            localStorage.setItem('isLoggedIn', 'false');
-            alert("로그아웃 되었습니다.");
-            location.reload(); 
+        // 3. 로그아웃 (마이페이지와 동일하게 데이터 완전 삭제)
+        function handleLogout() {
+            if (confirm("로그아웃 하시겠습니까?")) {
+                localStorage.clear(); // 모든 로그인 및 유저 데이터 초기화
+                alert("로그아웃 되었습니다.");
+                location.reload(); 
+            }
         }
-    }
-
-    // 서비스 카드들에 권한 체크 이벤트 연결
-    document.querySelectorAll('.service-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            checkAuth(e, this.getAttribute('href'));
-        });
-    });
-
-    // 로고 클릭 시 메인으로
-    document.getElementById('main_logo').addEventListener('click', function() {
-        location.href = 'mainpage.html';
-    });
-</script>
+    </script>
 </body>
 </html>
-
