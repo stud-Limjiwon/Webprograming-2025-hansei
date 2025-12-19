@@ -1,4 +1,4 @@
-// componentLoader.js - 공통 컴포넌트 동적 로더
+// componentLoader.js - 공통 컴포넌트 동적 로더 (접근성 개선)
 
 const ComponentLoader = (function() {
     'use strict';
@@ -9,9 +9,9 @@ const ComponentLoader = (function() {
         'header-simple': function() {
             return `
                 <header class="header">
-                    <div class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
+                    <a href="mainpage.html" class="logo" aria-label="BRIDGE 메인페이지로 이동">
                         <img src="images/logo.png" alt="BRIDGE 로고" class="logo-image">
-                    </div>
+                    </a>
                 </header>
             `;
         },
@@ -20,10 +20,12 @@ const ComponentLoader = (function() {
         'header-myinfo': function() {
             return `
                 <header class="header">
-                    <div class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
+                    <a href="mainpage.html" class="logo" aria-label="BRIDGE 메인페이지로 이동">
                         <img src="images/logo.png" alt="BRIDGE 로고" class="logo-image">
-                    </div>
-                    <button class="my-info-btn" onclick="location.href='mypage.html'">내 정보</button>
+                    </a>
+                    <button type="button" class="my-info-btn" id="my-info-btn" aria-label="내 정보 페이지로 이동">
+                        내 정보
+                    </button>
                 </header>
             `;
         },
@@ -32,10 +34,12 @@ const ComponentLoader = (function() {
         'header-logout': function() {
             return `
                 <header class="header">
-                    <div id="main_logo" class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
+                    <a href="mainpage.html" class="logo" id="main_logo" aria-label="BRIDGE 메인페이지로 이동">
                         <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
-                    </div>
-                    <button class="logout-btn" id="logout-btn">로그아웃</button>
+                    </a>
+                    <button type="button" class="logout-btn" id="logout-btn" aria-label="로그아웃">
+                        로그아웃
+                    </button>
                 </header>
             `;
         },
@@ -44,10 +48,10 @@ const ComponentLoader = (function() {
         'header-main': function() {
             return `
                 <header class="header">
-                    <div id="main_logo" class="logo" onclick="location.href='mainpage.html'">
+                    <a href="mainpage.html" class="logo" id="main_logo" aria-label="BRIDGE 메인페이지로 이동">
                         <img src="images/logo.png" alt="BRIDGE 로고" class="logo-image">
-                    </div>
-                    <div id="auth-area"></div>
+                    </a>
+                    <div id="auth-area" role="navigation" aria-label="사용자 인증"></div>
                 </header>
             `;
         },
@@ -55,8 +59,10 @@ const ComponentLoader = (function() {
         // 네비게이션 바 (뒤로가기 + 제목)
         'nav-back': function(title = '페이지') {
             return `
-                <nav class="nav-bar">
-                    <button class="back-btn" onclick="goBack()">←</button>
+                <nav class="nav-bar" role="navigation" aria-label="페이지 네비게이션">
+                    <button type="button" class="back-btn" id="back-btn" aria-label="이전 페이지로 돌아가기">
+                        ←
+                    </button>
                     <h1 class="page-title" id="page-title">${title}</h1>
                 </nav>
             `;
@@ -99,6 +105,26 @@ const ComponentLoader = (function() {
                 if (logoutBtn && typeof BridgeApp !== 'undefined') {
                     logoutBtn.addEventListener('click', BridgeApp.auth.logout);
                     console.log('✓ 로그아웃 버튼 이벤트 등록');
+                }
+            }
+            
+            // 내 정보 버튼 이벤트 등록
+            if (componentName === 'header-myinfo') {
+                const myInfoBtn = document.getElementById('my-info-btn');
+                if (myInfoBtn) {
+                    myInfoBtn.addEventListener('click', function() {
+                        window.location.href = 'mypage.html';
+                    });
+                    console.log('✓ 내 정보 버튼 이벤트 등록');
+                }
+            }
+            
+            // 뒤로가기 버튼 이벤트 등록
+            if (componentName === 'nav-back') {
+                const backBtn = document.getElementById('back-btn');
+                if (backBtn && typeof BridgeApp !== 'undefined') {
+                    backBtn.addEventListener('click', BridgeApp.ui.goBack);
+                    console.log('✓ 뒤로가기 버튼 이벤트 등록');
                 }
             }
         } catch (error) {

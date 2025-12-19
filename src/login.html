@@ -6,46 +6,82 @@
     <title>로그인 - BRIDGE</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/accessibility.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-    <header class="header">
-        <a href="mainpage.html" class="logo">
-            <span class="a11y-hidden">BRIDGE</span>
-        </a>
-    </header>
+    <!-- Skip to content 링크 -->
+    <a href="#main-content" class="skip-to-content">본문으로 건너뛰기</a>
+    
+    <!-- 헤더 컨테이너 -->
+    <div id="header-container"></div>
 
-    <div class="login-container">
-        <div class="login-box">
-            <div class="form-group">
-                <label class="form-label">아이디</label>
-                <input type="text" id="user-id" class="form-input" placeholder="example@domain.com">
-            </div>
+    <main id="main-content">
+        <div class="login-container">
+            <div class="login-box">
+                <form id="login-form" aria-labelledby="login-heading">
+                    <h2 id="login-heading" class="sr-only">로그인</h2>
+                    
+                    <div class="form-group">
+                        <label for="user-id" class="form-label required">아이디</label>
+                        <input type="email" 
+                        id="user-id" 
+                        class="form-input" 
+                        placeholder="example@domain.com"
+                        aria-required="true"
+                        aria-describedby="id-error"
+                        autocomplete="email">
+                        <span id="id-error" class="error-message" role="alert" aria-live="polite"></span>
+                    </div>
 
-            <div class="form-group">
-                <label class="form-label">비밀번호</label>
-                <input type="password" id="user-pw" class="form-input" placeholder="비밀번호를 입력하세요.">
-                <small class="form-helper">* 비밀번호는 4자 이상 입력해주세요.</small>
-            </div>
+                    <div class="form-group">
+                        <label for="user-pw" class="form-label required">비밀번호</label>
+                        <input type="password" 
+                        id="user-pw" 
+                        class="form-input" 
+                        placeholder="비밀번호를 입력하세요."
+                        aria-required="true"
+                        aria-describedby="pw-helper pw-error"
+                        autocomplete="current-password">
+                        <small id="pw-helper" class="form-helper">* 비밀번호는 4자 이상 입력해주세요.</small>
+                        <span id="pw-error" class="error-message" role="alert" aria-live="polite"></span>
+                    </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="agree" class="checkbox-input" checked>
-                <label for="agree" class="checkbox-label">이용약관 동의</label>
-            </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" 
+                        id="agree" 
+                        class="checkbox-input" 
+                        checked
+                        aria-required="true">
+                        <label for="agree" class="checkbox-label">이용약관 동의</label>
+                    </div>
 
-            <button class="btn btn-primary" onclick="handleLogin()">로그인</button>
+                    <button type="submit" class="btn btn-primary" aria-label="로그인하기">
+                        로그인
+                    </button>
+                </form>
 
-            <div class="link-group">
-                <a href="#" class="link">아이디/비밀번호 찾기</a>
-                <a href="#" class="link">회원가입</a>
+                <nav class="link-group" aria-label="계정 관련 링크">
+                    <a href="#" class="link">아이디/비밀번호 찾기</a>
+                    <a href="#" class="link">회원가입</a>
+                </nav>
             </div>
         </div>
-    </div>
+    </main>
 
     <script src="javaScript/constants.js"></script>
     <script src="javaScript/modal.js"></script>
+    <script src="javaScript/componentLoader.js"></script>
+    <script src="javaScript/common.js"></script>
+    <script src="javaScript/main.js"></script>
     
     <script>
+        // 로그인 폼 제출 처리
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            handleLogin();
+        });
+        
         function handleLogin() {
             const idInput = document.getElementById('user-id').value.trim();
             const pwInput = document.getElementById('user-pw').value;
@@ -61,23 +97,31 @@
             
             // 2. 아이디 검증
             if (!idInput) {
-                ModalSystem.warning('아이디를 입력해주세요.', '입력 오류');
+                ModalSystem.warning('아이디를 입력해주세요.', '입력 오류').then(() => {
+                    document.getElementById('user-id').focus();
+                });
                 return;
             }
             
             if (!idInput.includes('@')) {
-                ModalSystem.warning('아이디에 @도메인을 포함해주세요.<br>(예: user@email.com)', '아이디 형식 오류');
+                ModalSystem.warning('아이디에 @도메인을 포함해주세요.<br>(예: user@email.com)', '아이디 형식 오류').then(() => {
+                    document.getElementById('user-id').focus();
+                });
                 return;
             }
 
             // 3. 비밀번호 검증
             if (!pwInput) {
-                ModalSystem.warning('비밀번호를 입력해주세요.', '입력 오류');
+                ModalSystem.warning('비밀번호를 입력해주세요.', '입력 오류').then(() => {
+                    document.getElementById('user-pw').focus();
+                });
                 return;
             }
             
             if (pwInput.length < 4) {
-                ModalSystem.warning('비밀번호를 4자 이상 입력해주세요.', '비밀번호 형식 오류');
+                ModalSystem.warning('비밀번호를 4자 이상 입력해주세요.', '비밀번호 형식 오류').then(() => {
+                    document.getElementById('user-pw').focus();
+                });
                 return;
             }
 
@@ -94,21 +138,6 @@
                 ModalSystem.error('로그인 처리 중 오류가 발생했습니다.');
             }
         }
-        
-        // Enter 키로 로그인
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('user-pw').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleLogin();
-                }
-            });
-            
-            document.getElementById('user-id').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    handleLogin();
-                }
-            });
-        });
     </script>
 </body>
 </html>
