@@ -182,3 +182,4 @@ function goBack() {
 function setProfileIcon(userType, elementId) {
     BridgeApp.ui.setProfileIcon(userType, elementId);
 }
+
