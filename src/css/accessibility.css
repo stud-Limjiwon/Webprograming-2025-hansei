@@ -1,0 +1,235 @@
+/* 모든 포커스 가능한 요소에 기본 포커스 스타일 */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+[tabindex]:focus {
+    outline: 3px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* 마우스 클릭 시에는 포커스 표시 안 함 (키보드만) */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+input:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+textarea:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* 키보드 포커스 시 명확한 표시 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* ===== 버튼 스타일 개선 ===== */
+
+/* 버튼에 마우스 커서 */
+button,
+[role="button"] {
+    cursor: pointer;
+}
+
+/* 비활성 버튼 */
+button:disabled,
+[role="button"][aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ===== 토글 스위치 접근성 ===== */
+
+/* 토글 버튼 포커스 */
+.toggle-switch:focus {
+    outline: 3px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.toggle-switch:focus-visible {
+    outline: 3px solid #3b82f6;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* 토글 버튼 활성 상태 표시 개선 */
+.toggle-switch[aria-checked="true"]::before {
+    content: "켜짐";
+    position: absolute;
+    left: -9999px; /* 스크린 리더 전용 */
+}
+
+.toggle-switch[aria-checked="false"]::before {
+    content: "꺼짐";
+    position: absolute;
+    left: -9999px; /* 스크린 리더 전용 */
+}
+
+/* ===== 링크 스타일 ===== */
+
+/* 링크에 밑줄 (접근성) */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:focus {
+    text-decoration: underline;
+}
+
+/* ===== Skip to content 링크 ===== */
+.skip-to-content {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1rem 2rem;
+    background-color: #3b82f6;
+    color: white;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-to-content:focus {
+    left: 0;
+    top: 0;
+}
+
+/* ===== 스크린 리더 전용 텍스트 ===== */
+.sr-only,
+.a11y-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* 포커스 시 보이기 */
+.sr-only:focus,
+.a11y-hidden:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* ===== 키보드 네비게이션 힌트 ===== */
+
+/* 탭 순서 표시 (개발 중에만 사용) */
+.show-tab-order a:focus::after,
+.show-tab-order button:focus::after,
+.show-tab-order input:focus::after {
+    content: " [TAB]";
+    color: #3b82f6;
+    font-weight: bold;
+    margin-left: 4px;
+}
+
+/* ===== 고대비 모드 지원 ===== */
+@media (prefers-contrast: high) {
+    a:focus,
+    button:focus,
+    input:focus {
+        outline: 4px solid currentColor;
+        outline-offset: 2px;
+    }
+}
+
+/* ===== 애니메이션 감소 모드 ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ===== 서비스 카드 접근성 ===== */
+.service-card:focus {
+    outline: 3px solid #3b82f6;
+    outline-offset: 4px;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.service-card:focus-visible {
+    outline: 3px solid #3b82f6;
+    outline-offset: 4px;
+}
+
+/* ===== 폼 요소 접근성 ===== */
+
+/* 레이블과 입력 필드 관계 명확히 */
+label {
+    cursor: pointer;
+}
+
+/* 필수 입력 표시 */
+input:required,
+select:required,
+textarea:required {
+    box-shadow: none; /* 브라우저 기본 스타일 제거 */
+}
+
+label.required::after,
+.form-label.required::after {
+    content: " *";
+    color: #ef4444;
+    font-weight: bold;
+}
+
+/* 에러 상태 */
+input:invalid:not(:placeholder-shown),
+select:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* ===== 로딩 상태 접근성 ===== */
+[aria-busy="true"] {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+/* ===== 다크모드 대비 (접근성) ===== */
+@media (prefers-color-scheme: dark) {
+    a:focus,
+    button:focus {
+        outline-color: #60a5fa;
+    }
+}
+
+/* ===== 모바일 터치 타겟 크기 ===== */
+@media (max-width: 768px) {
+    button,
+    a,
+    input,
+    select {
+        min-height: 44px; 
+        min-width: 44px;
+    }
+}

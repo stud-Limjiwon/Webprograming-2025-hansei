@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIDGE - 마이페이지</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="css/mypage.css">
+</head>
+<body>
+    <header class="header">
+        <div id="main_logo" class="logo" style="cursor: pointer;" onclick="location.href='mainpage.html'">
+            <img src="images/logo.png" alt="BRIDGE 서비스 로고" class="logo-image">
+        </div>
+        <button class="logout-btn" id="logout-btn">로그아웃</button>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">마이페이지</h1>
+
+        <div class="card">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img id="profile-icon" src="images/logo.png" alt="프로필 아이콘" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-header">
+                        <div class="profile-name">개인 정보</div>
+                        <button class="edit-btn" onclick="handleEdit()">
+                            <span>✎</span> 편집
+                        </button>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-value" id="display-name">등록해주세요</div>
+                        <div id="user-type-display" style="color: #3b82f6; font-weight: bold; font-size: 14px; margin-top: 4px;">등록된 유형 없음</div>
+                    </div>
+                    <div class="info-row" style="margin-top: 10px;">
+                        <div class="info-label">전화번호</div>
+                        <div class="info-value" id="display-phone">등록해주세요</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="iot-section">
+                <div class="iot-left">
+                    <h2 class="iot-title">IoT 기기 연동</h2>
+                    
+                    <div class="device-info">
+                        <div class="device-label">연동 이름</div>
+                        <div class="device-value" id="iot-name">등록해주세요</div>
+                    </div>
+
+                    <div class="device-info">
+                        <div class="device-label">연동 번호</div>
+                        <div class="device-value" id="iot-phone">등록해주세요</div>
+                    </div>
+
+                    <div class="device-info">
+                        <div class="device-label">계정 이메일</div>
+                        <div class="device-value" id="display-email">불러오는 중...</div>
+                    </div>
+
+                    <div class="device-info">
+                        <div class="device-label">IoT 기기 번호</div>
+                        <div class="device-value">IOT-BRIDGE-001</div>
+                    </div>
+                </div>
+
+                <div class="iot-right">
+                    <div class="toggle-row">
+                        <div class="toggle-label">WiFi</div>
+                        <div class="toggle-switch" id="toggle-wifi" onclick="handleToggle('wifi', this)"></div>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-label">Bluetooth</div>
+                        <div class="toggle-switch" id="toggle-bluetooth" onclick="handleToggle('bluetooth', this)"></div>
+                    </div>
+                    <div class="toggle-row">
+                        <div class="toggle-label">GPS</div>
+                        <div class="toggle-switch" id="toggle-gps" onclick="handleToggle('gps', this)"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="javaScript/constants.js"></script>
+    <script src="javaScript/modal.js"></script>
+    <script src="javaScript/common.js"></script>
+    <script src="javaScript/mypage.js"></script>
+</body>
+</html>

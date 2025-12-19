@@ -1,0 +1,175 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.logo-text {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333;
+}
+
+.my-info-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #333;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.my-info-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.nav-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.back-btn {
+    font-size: 24px;
+    color: #333;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.page-title {
+    flex: 1;
+    margin-right: 24px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.main-icon {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.main-icon-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 110px;
+    background-color: #2563eb;
+    border-radius: 40px;
+}
+
+.eye-icon,
+.wheelchair-icon {
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.feature-options {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.feature-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.feature-option .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    color: #666;
+    border: 2px solid #666;
+    border-radius: 50%;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.card {
+    flex: 1;
+    padding: 50px 20px;
+    background-color: #f0f7ff;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 20px;
+    color: #333;
+    stroke-width: 1.5;
+}
+
+.card-title {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #666;
+}
+
+.use-btn {
+    display: block;
+    width: 280px;
+    margin: 0 auto;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.use-btn:hover {
+    background-color: #2563eb;
+}
+
+@media (min-width: 480px) {
+    .cards {
+    flex-direction: row;
+    }
+
+    .card {
+    width: auto;
+    }
+}

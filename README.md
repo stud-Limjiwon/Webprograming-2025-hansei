@@ -1,4 +1,4 @@
-﻿# Webprograming-2025-hansei
+# Webprograming-2025-hansei
 # 🌉 BRIDGE : IoT 기반 장애인 접근성 자동화 웹 서비스
 모든 사용자가 기술로부터 동등한 접근성을 누리도록 지원하는 사용자 맞춤형 정보 등록이 가능한 웹서비스
 
@@ -77,10 +77,6 @@ bridge-project/
 ├── README.md           
 └── API_Design.md      
 ```
-
-
-
-
 
 
 

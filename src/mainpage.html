@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIDGE - 장애인 지원 IoT 서비스</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/accessibility.css">
+    <link rel="stylesheet" href="css/mainpage.css">
+</head>
+
+<body>
+    <div id="header-container"></div>
+
+    <main>
+        <section class="hero-section">
+            <div class="illustration-area">
+                <img src="images/mainpage.png" alt="서비스 소개 일러스트">
+            </div>
+            <h1>장애인을 위한 IoT 연동 서비스</h1>
+            <p class="subtitle">
+                스마트폰과 연동하여 키오스크와 은행 업무를 더욱 편리하게 이용하세요.<br>
+                장애 유형에 맞는 맞춤형 지원을 제공합니다.
+            </p>
+        </section>
+
+        <section class="services-section">
+            <h2 class="section-title">유형을 선택하세요.</h2>
+            <div class="service-cards">
+                <a href="func_detail.html?type=visual" class="service-card">
+                    <h3 class="card-title">시각 장애인</h3>
+                    <div class="icon-placeholder">
+                        <img src="images/visual.png" alt="시각 장애인 아이콘">
+                    </div>
+                </a>
+                
+                <a href="func_detail.html?type=hearing" class="service-card">
+                    <h3 class="card-title">청각 장애인</h3>
+                    <div class="icon-placeholder">
+                        <img src="images/hearing.png" alt="청각 장애인 아이콘">
+                    </div>
+                </a>
+                
+                <a href="func_detail.html?type=physical" class="service-card">
+                    <h3 class="card-title">지체 장애인</h3>
+                    <div class="icon-placeholder">
+                        <img src="images/physical.png" alt="지체 장애인 아이콘">
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script src="javaScript/constants.js"></script>
+    <script src="javaScript/modal.js"></script>
+    <script src="javaScript/componentLoader.js"></script>
+    <script src="javaScript/common.js"></script>
+    <script src="javaScript/mainpage.js"></script>
+    <script src="javaScript/main.js"></script>
+</body>
+</html>
