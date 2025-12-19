@@ -1,0 +1,244 @@
+/* modal.css - 커스텀 모달 스타일 */
+
+/* 오버레이 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: auto; /* 클릭 가능하도록 */
+}
+
+.modal-overlay.modal-show {
+    opacity: 1;
+}
+
+.modal-overlay.modal-fade-out {
+    opacity: 0;
+    pointer-events: none; /* 페이드아웃 시 클릭 방지 */
+}
+
+/* 모달 컨테이너 */
+.modal-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+    transform: scale(0.9);
+    transition: transform 0.2s ease;
+}
+
+.modal-show .modal-container {
+    transform: scale(1);
+}
+
+.modal-fade-out .modal-container {
+    transform: scale(0.9);
+}
+
+/* 모달 헤더 */
+.modal-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+}
+
+/* 모달 바디 */
+.modal-body {
+    padding: 24px;
+}
+
+.modal-message {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #374151;
+}
+
+/* 모달 푸터 */
+.modal-footer {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* 버튼 공통 스타일 */
+.modal-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.modal-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.modal-btn:active {
+    transform: translateY(0);
+}
+
+/* 확인 버튼 */
+.modal-btn-confirm {
+    background-color: #3b82f6;
+    color: white;
+}
+
+.modal-btn-confirm:hover {
+    background-color: #2563eb;
+}
+
+/* 취소 버튼 */
+.modal-btn-cancel {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.modal-btn-cancel:hover {
+    background-color: #d1d5db;
+}
+
+/* 모달 타입별 스타일 */
+.modal-info .modal-header {
+    background-color: #eff6ff;
+}
+
+.modal-info .modal-title {
+    color: #1e40af;
+}
+
+.modal-success .modal-header {
+    background-color: #f0fdf4;
+}
+
+.modal-success .modal-title {
+    color: #15803d;
+}
+
+.modal-success .modal-btn-confirm {
+    background-color: #22c55e;
+}
+
+.modal-success .modal-btn-confirm:hover {
+    background-color: #16a34a;
+}
+
+.modal-warning .modal-header {
+    background-color: #fffbeb;
+}
+
+.modal-warning .modal-title {
+    color: #b45309;
+}
+
+.modal-warning .modal-btn-confirm {
+    background-color: #f59e0b;
+}
+
+.modal-warning .modal-btn-confirm:hover {
+    background-color: #d97706;
+}
+
+.modal-error .modal-header {
+    background-color: #fef2f2;
+}
+
+.modal-error .modal-title {
+    color: #b91c1c;
+}
+
+.modal-error .modal-btn-confirm {
+    background-color: #ef4444;
+}
+
+.modal-error .modal-btn-confirm:hover {
+    background-color: #dc2626;
+}
+
+.modal-confirm .modal-header {
+    background-color: #f3f4f6;
+}
+
+.modal-confirm .modal-title {
+    color: #1f2937;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .modal-container {
+        width: 95%;
+        max-width: none;
+    }
+    
+    .modal-header {
+        padding: 16px 20px 12px;
+    }
+    
+    .modal-title {
+        font-size: 16px;
+    }
+    
+    .modal-body {
+        padding: 20px;
+    }
+    
+    .modal-message {
+        font-size: 14px;
+    }
+    
+    .modal-footer {
+        padding: 12px 20px;
+        flex-direction: column-reverse;
+    }
+    
+    .modal-btn {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* 접근성 개선 */
+.modal-btn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* 애니메이션 */
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-show .modal-container {
+    animation: modalSlideIn 0.3s ease;
+}

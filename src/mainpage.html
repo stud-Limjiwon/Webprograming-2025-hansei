@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BRIDGE - 장애인 지원 IoT 서비스</title>
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/mainpage.css">
 </head>
 
@@ -14,8 +15,7 @@
             <img src="images/logo.png" alt="BRIDGE 로고" class="logo-image">
         </div>
     
-        <div id="auth-area">
-            </div>
+        <div id="auth-area"></div>
     </header>
 
     <main>
@@ -33,21 +33,21 @@
         <section class="services-section">
             <h2 class="section-title">유형을 선택하세요.</h2>
             <div class="service-cards">
-                <a href="func_visual.html" class="service-card">
+                <a href="func_detail.html?type=visual" class="service-card">
                     <h3 class="card-title">시각 장애인</h3>
                     <div class="icon-placeholder">
                         <img src="images/visual.png" alt="시각 장애인 아이콘">
                     </div>
                 </a>
                 
-                <a href="func_hearing.html" class="service-card">
+                <a href="func_detail.html?type=hearing" class="service-card">
                     <h3 class="card-title">청각 장애인</h3>
                     <div class="icon-placeholder">
                         <img src="images/hearing.png" alt="청각 장애인 아이콘">
                     </div>
                 </a>
                 
-                <a href="func_physical.html" class="service-card">
+                <a href="func_detail.html?type=physical" class="service-card">
                     <h3 class="card-title">지체 장애인</h3>
                     <div class="icon-placeholder">
                         <img src="images/physical.png" alt="지체 장애인 아이콘">
@@ -57,50 +57,9 @@
         </section>
     </main>
 
-    <script>
-        window.onload = function() {
-            renderAuthButtons();
-            setupServiceCards();
-        };
-
-        // 1. 로그인 상태에 따른 버튼 렌더링
-        function renderAuthButtons() {
-            const authArea = document.getElementById('auth-area');
-            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-            
-            if (isLoggedIn) {
-                authArea.innerHTML = `
-                    <button onclick="location.href='mypage.html'" class="login-btn" style="margin-right:8px;">내 정보</button>
-                    <button onclick="handleLogout()" class="login-btn">로그아웃</button> 
-                `; 
-            } else {
-                authArea.innerHTML = `
-                    <button class="login-btn" onclick="location.href='login.html'">로그인</button>
-                `;
-            }
-        }
-
-        // 2. 서비스 카드 클릭 시 권한 체크
-        function setupServiceCards() {
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    if (localStorage.getItem('isLoggedIn') !== 'true') {
-                        e.preventDefault();
-                        alert("로그인이 필요한 서비스입니다.");
-                        location.href = 'login.html';
-                    }
-                });
-            });
-        }
-
-        // 3. 로그아웃 (마이페이지와 동일하게 데이터 완전 삭제)
-        function handleLogout() {
-            if (confirm("로그아웃 하시겠습니까?")) {
-                localStorage.clear(); // 모든 로그인 및 유저 데이터 초기화
-                alert("로그아웃 되었습니다.");
-                location.reload(); 
-            }
-        }
-    </script>
+    <script src="javaScript/constants.js"></script>
+    <script src="javaScript/modal.js"></script>
+    <script src="javaScript/common.js"></script>
+    <script src="javaScript/mainpage.js"></script>
 </body>
 </html>

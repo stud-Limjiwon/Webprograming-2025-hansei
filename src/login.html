@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인 - BRIDGE</title>
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
@@ -41,27 +42,73 @@
         </div>
     </div>
 
+    <script src="javaScript/constants.js"></script>
+    <script src="javaScript/modal.js"></script>
+    
     <script>
         function handleLogin() {
-            const idInput = document.getElementById('user-id').value;
+            const idInput = document.getElementById('user-id').value.trim();
             const pwInput = document.getElementById('user-pw').value;
-            // 1. 입력값 검증
+            const agreeCheck = document.getElementById('agree').checked;
+            
+            // 1. 이용약관 동의 확인
+            if (!agreeCheck) {
+                ModalSystem.warning('이용약관에 동의해주세요.', '약관 동의 필요').then(() => {
+                    document.getElementById('agree').focus();
+                });
+                return;
+            }
+            
+            // 2. 아이디 검증
+            if (!idInput) {
+                ModalSystem.warning('아이디를 입력해주세요.', '입력 오류');
+                return;
+            }
+            
             if (!idInput.includes('@')) {
-                alert("아이디에 @도메인을 포함해주세요. (예: user@email.com)");
+                ModalSystem.warning('아이디에 @도메인을 포함해주세요.<br>(예: user@email.com)', '아이디 형식 오류');
                 return;
             }
 
+            // 3. 비밀번호 검증
+            if (!pwInput) {
+                ModalSystem.warning('비밀번호를 입력해주세요.', '입력 오류');
+                return;
+            }
+            
             if (pwInput.length < 4) {
-                alert("비밀번호를 4자 이상 입력해주세요.");
+                ModalSystem.warning('비밀번호를 4자 이상 입력해주세요.', '비밀번호 형식 오류');
                 return;
             }
 
-            // 2. 로그인 성공 시 데이터 처리
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userEmail', idInput); // 입력한 아이디 저장
-            alert("로그인에 성공하였습니다!");
-            window.location.href = 'mainpage.html';
+            // 4. 로그인 성공 처리
+            try {
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userEmail', idInput);
+                
+                ModalSystem.success('로그인에 성공하였습니다!', '로그인 성공').then(() => {
+                    window.location.href = 'mainpage.html';
+                });
+            } catch (error) {
+                console.error('로그인 처리 중 에러:', error);
+                ModalSystem.error('로그인 처리 중 오류가 발생했습니다.');
+            }
         }
+        
+        // Enter 키로 로그인
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('user-pw').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
+            
+            document.getElementById('user-id').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleLogin();
+                }
+            });
+        });
     </script>
 </body>
 </html>

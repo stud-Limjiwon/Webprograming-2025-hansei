@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BRIDGE - 마이페이지</title>
     <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/mypage.css">
 </head>
 <body>
@@ -71,89 +72,24 @@
                 <div class="iot-right">
                     <div class="toggle-row">
                         <div class="toggle-label">WiFi</div>
-                        <div class="toggle-switch" onclick="this.classList.toggle('off')"></div>
+                        <div class="toggle-switch" id="toggle-wifi" onclick="handleToggle('wifi', this)"></div>
                     </div>
                     <div class="toggle-row">
                         <div class="toggle-label">Bluetooth</div>
-                        <div class="toggle-switch" onclick="this.classList.toggle('off')"></div>
+                        <div class="toggle-switch" id="toggle-bluetooth" onclick="handleToggle('bluetooth', this)"></div>
                     </div>
                     <div class="toggle-row">
                         <div class="toggle-label">GPS</div>
-                        <div class="toggle-switch" onclick="this.classList.toggle('off')"></div>
+                        <div class="toggle-switch" id="toggle-gps" onclick="handleToggle('gps', this)"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <script>
-        // [1] 로그인 즉시 체크
-        (function checkLogin() {
-            if (localStorage.getItem('isLoggedIn') !== 'true') {
-                alert("로그인이 필요한 서비스입니다.");
-                location.href = 'mainpage.html';
-            }
-        })();
-
-        // [2] 페이지 로드 시 데이터 반영
-        window.onload = function() {
-            const savedEmail = localStorage.getItem('userEmail') || "정보 없음";
-            const savedName = localStorage.getItem('userName');
-            const savedPhone = localStorage.getItem('userPhone');
-            const savedType = localStorage.getItem('userType') || "미선택";
-    
-            // 이름 및 전화번호 반영
-            if (savedName && savedName !== "null") {
-                document.getElementById('display-name').innerText = savedName;
-                document.getElementById('iot-name').innerText = savedName;
-            }
-            if (savedPhone && savedPhone !== "null") {
-                document.getElementById('display-phone').innerText = savedPhone;
-                document.getElementById('iot-phone').innerText = savedPhone;
-            }
-            document.getElementById('display-email').innerText = savedEmail;
-            document.getElementById('user-type-display').innerText = savedType;
-
-            // 프로필 아이콘 설정 및 오류 핸들링
-            const profileIcon = document.getElementById('profile-icon');
-            profileIcon.onerror = function() {
-                this.src = 'images/logo.png'; 
-            };
-
-            const iconMap = {
-                '시각장애인': 'images/visual.png',
-                '청각장애인': 'images/hearing.png',
-                '지체장애인': 'images/physical.png'
-            };
-            profileIcon.src = iconMap[savedType] || 'images/logo.png';
-        };
-
-        // [3] 편집 기능
-        function handleEdit() {
-            const currentName = document.getElementById('display-name').innerText;
-            const currentPhone = document.getElementById('display-phone').innerText;
-
-            const nameValue = (currentName === "등록해주세요") ? "" : currentName;
-            const phoneValue = (currentPhone === "등록해주세요") ? "" : currentPhone;
-
-            const newName = prompt("성명을 입력하세요:", nameValue);
-            if (newName === null) return; // 취소 클릭 시
-
-            const newPhone = prompt("전화번호를 입력하세요:", phoneValue);
-            if (newPhone === null) return;
-
-            localStorage.setItem('userName', newName || "등록해주세요");
-            localStorage.setItem('userPhone', newPhone || "등록해주세요");
-            location.reload();
-        }
-
-        // [4] 로그아웃 로직
-        document.getElementById('logout-btn').addEventListener('click', function() {
-            if (confirm("로그아웃 하시겠습니까?")) {
-                localStorage.clear(); // 전체 초기화
-                location.href = 'mainpage.html';
-            }
-        });
-    </script>
+    <script src="javaScript/constants.js"></script>
+    <script src="javaScript/modal.js"></script>
+    <script src="javaScript/common.js"></script>
+    <script src="javaScript/mypage.js"></script>
 </body>
 </html>
