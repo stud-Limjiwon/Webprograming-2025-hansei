@@ -90,10 +90,10 @@ const MainpageModule = (function() {
     return {
         init: function() {
             try {
-                console.log('메인페이지 초기화 시작...');
+                console.log('메인페이지 모듈 초기화 시작...');
                 renderAuthButtons();
                 setupServiceCards();
-                console.log('✓ 메인페이지 초기화 완료');
+                console.log('✓ 메인페이지 모듈 초기화 완료');
             } catch (error) {
                 console.error('메인페이지 초기화 실패:', error);
                 ModalSystem.error('페이지 로드 중 문제가 발생했습니다.');
@@ -102,12 +102,4 @@ const MainpageModule = (function() {
     };
 })();
 
-// 페이지 로드 시 초기화
-window.onload = function() {
-    try {
-        MainpageModule.init();
-    } catch (error) {
-        console.error('페이지 로드 실패:', error);
-        ModalSystem.error('페이지를 불러오는 중 오류가 발생했습니다.');
-    }
-};
+// window.onload 제거 - main.js에서 처리

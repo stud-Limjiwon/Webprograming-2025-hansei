@@ -111,10 +111,17 @@ const FuncModule = (function() {
                 return false;
             }
             
-            button.onclick = function() {
-                FuncModule.register(typeName);
-            };
+            // 기존 이벤트 리스너 제거
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
             
+            // 새 이벤트 리스너 등록
+            newButton.addEventListener('click', function() {
+                console.log('이용하기 버튼 클릭됨');
+                FuncModule.register(typeName);
+            });
+            
+            console.log(`✓ 등록 버튼 설정 완료 (${typeName})`);
             return true;
         } catch (error) {
             console.error('등록 버튼 설정 실패:', error);
@@ -144,9 +151,10 @@ const FuncModule = (function() {
     return {
         init: function() {
             try {
-                console.log('페이지 초기화 시작...');
+                console.log('=== func_detail.html 초기화 시작 ===');
                 
                 const type = getTypeFromUrl();
+                console.log('URL type 파라미터:', type);
                 
                 if (!type) {
                     console.error("유효하지 않은 접근");
@@ -157,6 +165,7 @@ const FuncModule = (function() {
                 }
                 
                 const data = AppConstants.getDisabilityConfig(type);
+                console.log('페이지 데이터:', data);
                 
                 if (!data) {
                     console.error("페이지 데이터를 찾을 수 없습니다:", type);
@@ -168,6 +177,7 @@ const FuncModule = (function() {
                 
                 renderPage(data);
                 console.log('✓ 페이지 초기화 완료');
+                console.log('=== 초기화 끝 ===');
             } catch (error) {
                 console.error('페이지 초기화 실패:', error);
                 ModalSystem.error(AppConstants.MESSAGES.PAGE_LOAD_ERROR).then(() => {
@@ -178,6 +188,9 @@ const FuncModule = (function() {
         
         register: function(typeName) {
             try {
+                console.log('=== 등록 프로세스 시작 ===');
+                console.log('typeName:', typeName);
+                
                 if (!typeName) {
                     console.error('typeName이 지정되지 않았습니다');
                     ModalSystem.error('등록 정보가 올바르지 않습니다.');
@@ -185,23 +198,31 @@ const FuncModule = (function() {
                 }
                 
                 // 1단계: 확인 모달
+                console.log('1단계: 확인 모달 표시');
                 ModalSystem.confirm(`${typeName} 지원 기능을 등록하시겠습니까?`, '등록 확인').then((confirmed) => {
+                    console.log('2단계: 사용자 응답 =', confirmed);
+                    
                     if (!confirmed) {
                         console.log('사용자가 등록을 취소했습니다');
                         return;
                     }
                     
                     // 2단계: 저장 시도
+                    console.log('3단계: localStorage 저장 시도');
                     const saved = BridgeApp.utils.setStorage(AppConstants.STORAGE_KEYS.USER_TYPE, typeName);
+                    console.log('저장 결과:', saved);
                     
                     if (saved) {
-                        console.log('등록 성공:', typeName);
+                        console.log('4단계: 저장 성공, 성공 모달 표시');
                         
                         // 3단계: 성공 모달 표시 후 페이지 이동
                         ModalSystem.success('등록이 완료되었습니다!', '등록 완료').then(() => {
-                            console.log('마이페이지로 이동합니다');
+                            console.log('5단계: 성공 모달 확인, 페이지 이동 준비');
+                            console.log('목적지:', AppConstants.PAGES.MYPAGE);
+                            
                             // 모달 애니메이션 후 페이지 이동
                             setTimeout(() => {
+                                console.log('6단계: 페이지 이동 실행');
                                 window.location.href = AppConstants.PAGES.MYPAGE;
                             }, 400);
                         });
@@ -222,14 +243,7 @@ const FuncModule = (function() {
 })();
 
 // 페이지 로드 시 초기화
-window.onload = function() {
-    try {
-        FuncModule.init();
-    } catch (error) {
-        console.error('페이지 로드 실패:', error);
-        ModalSystem.error('페이지를 불러오는 중 오류가 발생했습니다.');
-    }
-};
+// window.onload 제거 - main.js에서 처리
 
 // HTML에서 직접 호출하는 함수 (하위 호환성)
 function handleRegister(typeName) {
