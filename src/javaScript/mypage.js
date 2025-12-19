@@ -1,9 +1,6 @@
-// mypage.js - 마이페이지 전용 스크립트 (에러 핸들링 강화)
-
 const MypageModule = (function() {
     'use strict';
     
-    // === Private 함수 ===
     function getUserData() {
         try {
             const KEYS = AppConstants.STORAGE_KEYS;
@@ -148,7 +145,6 @@ const MypageModule = (function() {
                 
                 const currentState = element.classList.contains('off') ? 'off' : 'on';
                 
-                // 올바른 키 사용 (AppConstants에 정의된 키)
                 const KEYS = AppConstants.STORAGE_KEYS;
                 let storageKey;
                 
@@ -231,7 +227,7 @@ window.onload = function() {
     }
 };
 
-// HTML에서 직접 호출하는 함수들 (하위 호환성)
+// HTML에서 직접 호출하는 함수
 function handleToggle(type, element) {
     MypageModule.handleToggle(type, element);
 }

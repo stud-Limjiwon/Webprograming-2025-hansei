@@ -1,15 +1,10 @@
-// modal.js - 커스텀 모달 시스템
-
 const ModalSystem = (function() {
     'use strict';
     
-    // === Private 변수 ===
     let currentModal = null;
     let resolveCallback = null;
     
-    // === Private 함수 ===
     function forceCleanupModals() {
-        // DOM에 남아있을 수 있는 모든 모달 제거
         const allModals = document.querySelectorAll('[id^="bridge-modal-"]');
         allModals.forEach(modal => {
             if (modal.parentNode) {
@@ -24,7 +19,7 @@ const ModalSystem = (function() {
         const {
             title = '',
             message,
-            type = 'info', // 'info', 'success', 'warning', 'error', 'confirm'
+            type = 'info', 
             confirmText = '확인',
             cancelText = '취소',
             showCancel = false
@@ -103,7 +98,7 @@ const ModalSystem = (function() {
     function showModal(options) {
         return new Promise((resolve) => {
             try {
-                // 기존 모달 제거 (강제 정리 포함)
+                // 기존 모달 제거
                 forceCleanupModals();
                 
                 // 새 모달 생성
@@ -125,7 +120,7 @@ const ModalSystem = (function() {
                     if (currentModal) {
                         currentModal.classList.add('modal-show');
                     }
-                }, 50); // 10ms에서 50ms로 증가
+                }, 50); 
                 
             } catch (error) {
                 console.error('모달 표시 중 에러:', error);

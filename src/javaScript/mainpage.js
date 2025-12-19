@@ -1,5 +1,3 @@
-// mainpage.js - 메인페이지 전용 스크립트 (에러 핸들링 강화)
-
 const MainpageModule = (function() {
     'use strict';
     
@@ -101,5 +99,3 @@ const MainpageModule = (function() {
         }
     };
 })();
-
-// window.onload 제거 - main.js에서 처리

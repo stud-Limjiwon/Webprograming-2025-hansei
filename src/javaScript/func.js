@@ -1,5 +1,3 @@
-// func.js - 장애 유형별 지원 기능 페이지 (에러 핸들링 강화)
-
 const FuncModule = (function() {
     'use strict';
     
@@ -243,8 +241,6 @@ const FuncModule = (function() {
 })();
 
 // 페이지 로드 시 초기화
-// window.onload 제거 - main.js에서 처리
-
 // HTML에서 직접 호출하는 함수 (하위 호환성)
 function handleRegister(typeName) {
     FuncModule.register(typeName);

@@ -1,5 +1,3 @@
-// constants.js - 애플리케이션 전역 상수 및 설정
-
 const AppConstants = (function() {
     'use strict';
     

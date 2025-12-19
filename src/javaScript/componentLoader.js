@@ -1,5 +1,3 @@
-// componentLoader.js - 공통 컴포넌트 동적 로더 (접근성 개선)
-
 const ComponentLoader = (function() {
     'use strict';
     

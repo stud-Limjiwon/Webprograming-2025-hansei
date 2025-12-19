@@ -1,5 +1,3 @@
-// common.js - 공통 모듈 (에러 핸들링 강화)
-
 const BridgeApp = (function() {
     'use strict';
     

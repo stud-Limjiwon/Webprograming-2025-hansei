@@ -1,5 +1,3 @@
-// main.js - 모든 페이지에서 실행되는 중앙 초기화 로직
-
 (function() {
     'use strict';
     
